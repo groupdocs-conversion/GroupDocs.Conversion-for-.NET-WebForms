@@ -6,9 +6,13 @@ obj
 src/Resources/*
 !src/Resources/.gitkeep
 node_modules
-src/package-lock.json
 src/client/package-lock.json
 /src/node  
 /GroupDocs.Conversion.WebForms.Test/GroupDocs.Conversion.WebForms.Test.csproj.user
 /GroupDocs.Conversion.WebForms.Test/bin
 /GroupDocs.Conversion.WebForms.Test/obj
+src/client/package-lock.json
+src/DocumentSamples
+!src/DocumentSamples/Conversion/.gitkeep
+src/Licenses
+!src/Licenses/.gitkeep 
