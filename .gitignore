@@ -1,18 +1,33 @@
-/packages
-/.vs
-/src/GroupDocs.Conversion.WebForms.csproj.user
-bin
-obj
+# Tool Runtime Dir
+packages/
+node_modules/
+
+# Visual Studio
+.vs/
+
+# User-specific files
+*.user
+
+# Build results
+[Bb]in/
+[Oo]bj/
+*.zip
+package-lock.json
+
+# Resources
 src/Resources/*
 !src/Resources/.gitkeep
-node_modules
-src/client/package-lock.json
-/src/node  
-/GroupDocs.Conversion.WebForms.Test/GroupDocs.Conversion.WebForms.Test.csproj.user
-/GroupDocs.Conversion.WebForms.Test/bin
-/GroupDocs.Conversion.WebForms.Test/obj
-src/client/package-lock.json
-src/DocumentSamples
-!src/DocumentSamples/Conversion/.gitkeep
+
+# Licenses
 src/Licenses
-!src/Licenses/.gitkeep 
+!src/Licenses/.gitkeep
+
+# Document samples
+src/DocumentSamples
+!src/DocumentSamples/.gitkeep
+
+# Git
+!.gitkeep
+
+# Finder in OSX
+.DS_Store
