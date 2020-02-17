@@ -135,7 +135,7 @@ namespace GroupDocs.Conversion.WebForms.Products.Conversion.Controllers
             }
             catch (System.Exception ex)
             {
-                return Request.CreateResponse(HttpStatusCode.OK, Resources.GenerateException(ex));
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, Resources.GenerateException(ex));
             }
         }
 
@@ -205,7 +205,7 @@ namespace GroupDocs.Conversion.WebForms.Products.Conversion.Controllers
             catch (System.Exception ex)
             {
                 // set exception message
-                return Request.CreateResponse(HttpStatusCode.OK, Resources.GenerateException(ex));
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, Resources.GenerateException(ex));
             }
         }
 
@@ -225,7 +225,7 @@ namespace GroupDocs.Conversion.WebForms.Products.Conversion.Controllers
             }
             catch (System.Exception ex)
             {
-                return Request.CreateResponse(HttpStatusCode.OK, Resources.GenerateException(ex));
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, Resources.GenerateException(ex));
             }
         }
 
