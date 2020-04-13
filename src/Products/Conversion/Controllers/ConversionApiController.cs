@@ -1,12 +1,10 @@
-﻿using GroupDocs.Conversion.Config;
-using GroupDocs.Conversion.Handler;
+﻿using GroupDocs.Conversion.Contracts;
 using GroupDocs.Conversion.WebForms.Products.Common.Entity.Web;
 using GroupDocs.Conversion.WebForms.Products.Common.Resources;
 using GroupDocs.Conversion.WebForms.Products.Common.Util.Comparator;
 using GroupDocs.Conversion.WebForms.Products.Conversion.Config;
 using GroupDocs.Conversion.WebForms.Products.Conversion.Entity.Web.Request;
 using GroupDocs.Conversion.WebForms.Products.Conversion.Entity.Web.Response;
-using GroupDocs.Conversion.WebForms.Products.Conversion.Filter;
 using GroupDocs.Conversion.WebForms.Products.Conversion.Manager;
 using System;
 using System.Collections.Generic;
@@ -27,28 +25,8 @@ namespace GroupDocs.Conversion.WebForms.Products.Conversion.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ConversionApiController : ApiController
     {
-
-        private readonly Common.Config.GlobalConfiguration GlobalConfiguration;       
-        private readonly ConversionManager Manager;
+        private readonly Common.Config.GlobalConfiguration GlobalConfiguration = new Common.Config.GlobalConfiguration();
         private readonly List<string> SupportedImageFormats = new List<string> { ".jp2", ".ico", ".psd", ".svg", ".bmp", ".jpeg", ".jpg", ".tiff", ".tif", ".png", ".gif", ".emf", ".wmf", ".dwg", ".dicom", ".dxf", ".jpe", ".jfif" };
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public ConversionApiController()
-        {
-            // Check if filesDirectory is relative or absolute path           
-            GlobalConfiguration = new Common.Config.GlobalConfiguration();
-            // Setup Conversion configuration
-            var conversionConfig = new ConversionConfig
-            {
-                StoragePath = GlobalConfiguration.GetConversionConfiguration().GetFilesDirectory(),
-                OutputPath = GlobalConfiguration.GetConversionConfiguration().GetResultDirectory()
-            };
-
-            ConversionHandler ConversionHandler = new ConversionHandler(conversionConfig);
-            Manager = new ConversionManager(ConversionHandler);
-        }
 
         /// <summary>
         /// Load Conversion configuration
@@ -70,7 +48,7 @@ namespace GroupDocs.Conversion.WebForms.Products.Conversion.Controllers
         [Route("loadFileTree")]
         public HttpResponseMessage loadFileTree(PostedDataEntity postedData)
         {
-            // get request body       
+            // get request body
             string relDirPath = postedData.path;
             // get file list from storage path
             try
@@ -98,6 +76,7 @@ namespace GroupDocs.Conversion.WebForms.Products.Conversion.Controllers
                     // check if current file/folder is hidden
                     if (fileInfo.Attributes.HasFlag(FileAttributes.Hidden) ||
                         Path.GetFileName(file).Equals(Path.GetFileName(GlobalConfiguration.GetConversionConfiguration().GetFilesDirectory())) ||
+                        Path.GetFileName(file).Equals(Path.GetFileName(GlobalConfiguration.GetConversionConfiguration().GetResultDirectory())) ||
                         Path.GetFileName(file).Equals(".gitkeep"))
                     {
                         // ignore current file and skip to next one
@@ -105,12 +84,14 @@ namespace GroupDocs.Conversion.WebForms.Products.Conversion.Controllers
                     }
                     else
                     {
-                        ConversionTypesEntity fileDescription = new ConversionTypesEntity();
-                        fileDescription.conversionTypes = new List<string>();
-                        fileDescription.guid = Path.GetFullPath(file);
-                        fileDescription.name = Path.GetFileName(file);
-                        // set is directory true/false
-                        fileDescription.isDirectory = fileInfo.Attributes.HasFlag(FileAttributes.Directory);
+                        ConversionTypesEntity fileDescription = new ConversionTypesEntity
+                        {
+                            conversionTypes = new List<string>(),
+                            guid = Path.GetFullPath(file),
+                            name = Path.GetFileName(file),
+                            // set is directory true/false
+                            isDirectory = fileInfo.Attributes.HasFlag(FileAttributes.Directory)
+                        };
                         // set file size
                         if (!fileDescription.isDirectory)
                         {
@@ -118,9 +99,9 @@ namespace GroupDocs.Conversion.WebForms.Products.Conversion.Controllers
                         }
 
                         string documentExtension = Path.GetExtension(fileDescription.name).TrimStart('.');
-                        if (!String.IsNullOrEmpty(documentExtension))
+                        if (!string.IsNullOrEmpty(documentExtension))
                         {
-                            string[] availableConversions = new DestinationTypesFilter().GetPosibleConversions(documentExtension);
+                            string[] availableConversions = GetPosibleConversions(documentExtension);
                             //list all available conversions
                             foreach (string name in availableConversions)
                             {
@@ -137,6 +118,21 @@ namespace GroupDocs.Conversion.WebForms.Products.Conversion.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, Resources.GenerateException(ex));
             }
+        }
+
+        private static string[] GetPosibleConversions(string documentExtension)
+        {
+            PossibleConversions conversions = Converter.GetPossibleConversions(documentExtension);
+            var conversionsFormats = new List<string>();
+
+            foreach (var conversion in conversions.All)
+            {
+                conversionsFormats.Add(conversion.Format.Extension);
+            }
+
+            conversionsFormats.Sort();
+
+            return conversionsFormats.ToArray();
         }
 
         /// <summary>
@@ -220,7 +216,7 @@ namespace GroupDocs.Conversion.WebForms.Products.Conversion.Controllers
         {
             try
             {
-                Manager.Convert(postedData);
+                ConversionManager.Convert(postedData, GlobalConfiguration, SupportedImageFormats);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (System.Exception ex)
