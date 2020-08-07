@@ -93,14 +93,4 @@ Please have a look at the LICENSE.md for more details
 - [GroupDocs.Conversion with JAVA Dropwizard ](https://github.com/groupdocs-conversion/GroupDocs.Conversion-for-Java-Dropwizard)
 - [GroupDocs.Conversion with .NET MVC](https://github.com/groupdocs-conversion/GroupDocs.Conversion-for-.NET-MVC) 
 
-
-
-## Resources
-- **Website:** [www.groupdocs.com](http://www.groupdocs.com)
-- **Product Home:** [GroupDocs.Conversion for .NET](https://products.groupdocs.com/conversion/NET)
-- **Product API References:** [GroupDocs.Conversion for .NET API](https://apireference.groupdocs.com)
-- **Download:** [Download GroupDocs.Conversion for .NET](http://downloads.groupdocs.com/conversion/NET)
-- **Documentation:** [GroupDocs.Conversion for .NET Documentation](https://docs.groupdocs.com/dashboard.action)
-- **Free Support Forum:** [GroupDocs.Conversion for .NET Free Support Forum](https://forum.groupdocs.com/c/conversion)
-- **Paid Support Helpdesk:** [GroupDocs.Conversion for .NET Paid Support Helpdesk](https://helpdesk.groupdocs.com)
-- **Blog:** [GroupDocs.Conversion for .NET Blog](https://blog.groupdocs.com/category/groupdocs-conversion-product-family)
+[Home](https://www.groupdocs.com/) | [Product Page](https://products.groupdocs.com/conversion/net) | [Documentation](https://docs.groupdocs.com/conversion/net) | [Demo](https://products.groupdocs.app/conversion/family) | [API Reference](https://apireference.groupdocs.com/net/conversion) | [Examples](https://github.com/groupdocs-conversion/GroupDocs.Conversion-for-.NET) | [Blog](https://blog.groupdocs.com/category/conversion/) | [Free Support](https://forum.groupdocs.com/c/conversion) | [Temporary License](https://purchase.groupdocs.com/temporary-license)
