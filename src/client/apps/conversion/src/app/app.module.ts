@@ -7,7 +7,7 @@ import { ConversionModule } from "@groupdocs.examples.angular/conversion";
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule,
-    ConversionModule.forRoot("http://localhost:8080")],
+    ConversionModule],
   providers: [],
   bootstrap: [AppComponent]
 })

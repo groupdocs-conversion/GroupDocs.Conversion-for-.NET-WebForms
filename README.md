@@ -82,6 +82,15 @@ docker run -p 8080:8080 --env application.hostAddress=localhost -v `pwd`/Documen
 ## Open http://localhost:8080/conversion in your favorite browser.
 ```
 
+## Troubleshooting
+### How to set custom baseURL
+BaseURL is fetched from address bar however you can set custom baseURL by adding *forRoot* parameter at [app.module.ts](https://github.com/groupdocs-conversion/GroupDocs.Conversion-for-.NET-WebForms/blob/master/src/client/apps/conversion/src/app/app.module.ts#L10)
+
+**Example:**
+```js
+ConversionModule.forRoot("http://localhost:8080")
+```
+
 ## License
 The MIT License (MIT). 
 
