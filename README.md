@@ -2,9 +2,9 @@
 # GroupDocs.Conversion for .NET Web.Forms Example
 ###### version 0.1.0
 
-[![Build status](https://ci.appveyor.com/api/projects/status/n7dah29eea50oyfc/branch/master?svg=true)](https://ci.appveyor.com/project/egorovpavel/groupdocs-conversion-for-net-webforms/branch/master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0a4d72eed19c4198ab87c3a351e79588)](https://www.codacy.com/app/GroupDocs/GroupDocs.Conversion-for-.NET-WebForms?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=groupdocs-conversion/GroupDocs.Conversion-for-.NET-WebForms&amp;utm_campaign=Badge_Grade)
 [![GitHub license](https://img.shields.io/github/license/groupdocs-conversion/GroupDocs.Conversion-for-.NET-WebForms.svg)](https://github.com/groupdocs-conversion/GroupDocs.Conversion-for-.NET-WebForms/blob/master/LICENSE)
+
+:warning: **This repository has moved to https://github.com/groupdocs-conversion/GroupDocs.Conversion-for-.NET/tree/master/Demos/WebForms**
 
 ## System Requirements
 - .NET Framework 4.5
